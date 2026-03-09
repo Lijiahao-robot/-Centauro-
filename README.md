@@ -74,4 +74,6 @@ Centauro 本体与系统
 
 • IIT开源组织：https://github.com/ADVRHumanoids
 
-• 国内半人马（LimX TRON2）：暂未开源论文，可关注逐际动力官网
+• 国内半人马（LimX TRON2）：
+pip install mujoco
+python run_centauro.py
