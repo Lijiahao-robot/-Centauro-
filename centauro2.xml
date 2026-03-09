@@ -1,0 +1,120 @@
+<mujoco model="centauro">
+  <compiler angle="degree" coordinate="local" inertiafromgeom="true"/>
+  <option timestep="0.002" gravity="0 0 -9.81"/>
+
+  <default>
+    <joint armature="0.05" damping="0.5" limited="true"/>
+    <geom conaffinity="0" condim="3" friction="1.0 0.1 0.1" 
+           rgba="0.2 0.7 0.8 1" solimp="0.9 0.95 0.01" solref="0.02 1"/>
+  </default>
+
+  <worldbody>
+    <geom name="floor" type="plane" size="3 3 0.1" rgba="0.8 0.8 0.8 1"/>
+
+    <body name="base" pos="0 0 0.6">
+      <joint name="free" type="free"/>
+      <geom name="base_box" type="box" size="0.25 0.2 0.12" rgba="0.2 0.6 0.9 1"/>
+
+      <!-- 左前腿 -->
+      <body name="lf_leg1" pos="-0.15 0.15 -0.08">
+        <joint name="lf_j1" type="hinge" axis="0 1 0" range="-45 45"/>
+        <geom type="cylinder" size="0.03 0.08" fromto="0 0 0 0 0 -0.08"/>
+        <body name="lf_leg2" pos="0 0 -0.08">
+          <joint name="lf_j2" type="hinge" axis="1 0 0" range="-90 90"/>
+          <geom type="cylinder" size="0.028 0.10" fromto="0 0 0 0 0 -0.10"/>
+          <body name="lf_wheel" pos="0 0 -0.10">
+            <joint name="lf_wheel" type="hinge" axis="1 0 0" range="-10000 10000"/>
+            <geom type="cylinder" size="0.05 0.015" axis="1 0 0" rgba="0.3 0.3 0.3 1"/>
+          </body>
+        </body>
+      </body>
+
+      <!-- 右前腿 -->
+      <body name="rf_leg1" pos="0.15 0.15 -0.08">
+        <joint name="rf_j1" type="hinge" axis="0 1 0" range="-45 45"/>
+        <geom type="cylinder" size="0.03 0.08" fromto="0 0 0 0 0 -0.08"/>
+        <body name="rf_leg2" pos="0 0 -0.08">
+          <joint name="rf_j2" type="hinge" axis="1 0 0" range="-90 90"/>
+          <geom type="cylinder" size="0.028 0.10" fromto="0 0 0 0 0 -0.10"/>
+          <body name="rf_wheel" pos="0 0 -0.10">
+            <joint name="rf_wheel" type="hinge" axis="1 0 0" range="-10000 10000"/>
+            <geom type="cylinder" size="0.05 0.015" axis="1 0 0" rgba="0.3 0.3 0.3 1"/>
+          </body>
+        </body>
+      </body>
+
+      <!-- 左后腿 -->
+      <body name="lb_leg1" pos="-0.15 -0.15 -0.08">
+        <joint name="lb_j1" type="hinge" axis="0 1 0" range="-45 45"/>
+        <geom type="cylinder" size="0.03 0.08" fromto="0 0 0 0 0 -0.08"/>
+        <body name="lb_leg2" pos="0 0 -0.08">
+          <joint name="lb_j2" type="hinge" axis="1 0 0" range="-90 90"/>
+          <geom type="cylinder" size="0.028 0.10" fromto="0 0 0 0 0 -0.10"/>
+          <body name="lb_wheel" pos="0 0 -0.10">
+            <joint name="lb_wheel" type="hinge" axis="1 0 0" range="-10000 10000"/>
+            <geom type="cylinder" size="0.05 0.015" axis="1 0 0" rgba="0.3 0.3 0.3 1"/>
+          </body>
+        </body>
+      </body>
+
+      <!-- 右后腿 -->
+      <body name="rb_leg1" pos="0.15 -0.15 -0.08">
+        <joint name="rb_j1" type="hinge" axis="0 1 0" range="-45 45"/>
+        <geom type="cylinder" size="0.03 0.08" fromto="0 0 0 0 0 -0.08"/>
+        <body name="rb_leg2" pos="0 0 -0.08">
+          <joint name="rb_j2" type="hinge" axis="1 0 0" range="-90 90"/>
+          <geom type="cylinder" size="0.028 0.10" fromto="0 0 0 0 0 -0.10"/>
+          <body name="rb_wheel" pos="0 0 -0.10">
+            <joint name="rb_wheel" type="hinge" axis="1 0 0" range="-10000 10000"/>
+            <geom type="cylinder" size="0.05 0.015" axis="1 0 0" rgba="0.3 0.3 0.3 1"/>
+          </body>
+        </body>
+      </body>
+
+      <!-- 左臂 -->
+      <body name="l_arm1" pos="-0.2 0 0.02">
+        <joint name="l_arm_j1" type="hinge" axis="0 1 0" range="-90 90"/>
+        <geom type="cylinder" size="0.025 0.10" fromto="0 0 0 -0.10 0 0"/>
+        <body name="l_arm2" pos="-0.10 0 0">
+          <joint name="l_arm_j2" type="hinge" axis="0 0 1" range="-90 90"/>
+          <geom type="cylinder" size="0.022 0.09" fromto="0 0 0 -0.09 0 0"/>
+        </body>
+      </body>
+
+      <!-- 右臂 -->
+      <body name="r_arm1" pos="0.2 0 0.02">
+        <joint name="r_arm_j1" type="hinge" axis="0 1 0" range="-90 90"/>
+        <geom type="cylinder" size="0.025 0.10" fromto="0 0 0 0.10 0 0"/>
+        <body name="r_arm2" pos="0.10 0 0">
+          <joint name="r_arm_j2" type="hinge" axis="0 0 1" range="-90 90"/>
+          <geom type="cylinder" size="0.022 0.09" fromto="0 0 0 0.09 0 0"/>
+        </body>
+      </body>
+
+    </body>
+  </worldbody>
+
+  <actuator>
+    <!-- 腿 -->
+    <motor name="lf_j1" joint="lf_j1" gear="20"/>
+    <motor name="lf_j2" joint="lf_j2" gear="20"/>
+    <motor name="rf_j1" joint="rf_j1" gear="20"/>
+    <motor name="rf_j2" joint="rf_j2" gear="20"/>
+    <motor name="lb_j1" joint="lb_j1" gear="20"/>
+    <motor name="lb_j2" joint="lb_j2" gear="20"/>
+    <motor name="rb_j1" joint="rb_j1" gear="20"/>
+    <motor name="rb_j2" joint="rb_j2" gear="20"/>
+
+    <!-- 轮子 -->
+    <motor name="lf_wheel" joint="lf_wheel" gear="10"/>
+    <motor name="rf_wheel" joint="rf_wheel" gear="10"/>
+    <motor name="lb_wheel" joint="lb_wheel" gear="10"/>
+    <motor name="rb_wheel" joint="rb_wheel" gear="10"/>
+
+    <!-- 手臂 -->
+    <motor name="l_arm_j1" joint="l_arm_j1" gear="10"/>
+    <motor name="l_arm_j2" joint="l_arm_j2" gear="10"/>
+    <motor name="r_arm_j1" joint="r_arm_j1" gear="10"/>
+    <motor name="r_arm_j2" joint="r_arm_j2" gear="10"/>
+  </actuator>
+</mujoco>
