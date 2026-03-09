@@ -1,0 +1,79 @@
+<mujoco model="centauro_embodied_<compiler angle="degree" coordinate="local" inertiafromgeom="true" fusestatic="false"/>
+  <option timestep="0.002" gravity="0 0 -9.81" iterations="50" ls_iterations="20"/>
+  
+  <default>
+    <joint armature="0.06" damping="0.8" limited="true" solimp="0.95 0.98 0.01" solref="0.015 1"/><geom conaffinity="0" condim="3" friction="1.2 0.15 0.1" rgba="0.2 0.65 0.85 1" 
+           solimp="0.92 0.96 0.01" solref="0.02 1"/></default>
+  
+<asset>
+   <texture name="body_tex" type="2d" builtin="flat" rgb1="0.2 0.65 0.85" width="128" height="128"/>
+<texture name="limb_tex" type="2d" builtin="flat" rgb1="0.4 0.4 0.4" width="128" height="128"/>
+<texture name="wheel_tex" type="2d" builtin="flat" rgb1="0.25 0.25 0.25" width="128" height="128<material name="body_mat" texture="body_tex" shininess="0.35"/><material name="limb_mat" texture="limb_tex" shininess="0.25<material name="wheel_mat" texture="wheel_tex" shininess="0.2"/>
+</asset>
+  
+ <worldbody>
+   <!-- 地面 -->
+   <geom name="ground" type="plane" size="6 6 0.1" material="limb_mat" rgba="0.85 0.85 0.85<!-- 机器人基座 -->
+   <body name="base" pos="0 0 0.65">
+<joint name="base_free" type="free"/><geom name="base_geom" type="box" size="0.28 0.23 0.14" material="body_mat"/><!-- IMU传感器<site name="imu_site" pos="0 0 0" size="0.01" rgba="0 0 0 0"/>
+<sensor>
+       <imu name="base_imu" site="imu_site</sensor><!-- 左前轮足 -->
+     <body name="lf_leg_root" pos="-0.18 0.17 -0.1<joint name="lf_leg_roll" type="hinge" axis="0 1 0" range="-50 50"/>
+       <geom type="cylinder" size="0.032 0.09" fromto="0 0 0 0 0 -0.09" material="body_mat<body name="lf_leg_calf" pos="0 0 -0.09"><joint name="lf_leg_pitch" type="hinge" axis="1 0 0" range="-95 95"/>
+          <geom type="cylinder" size="0.03 0.11" fromto="0 0 0 0 0 -0.11" material="body_mat"/>
+<body name="lf_wheel_body" pos="0 0 -0.11">
+            <joint name="lf_wheel_joint" type="hinge" axis="1 0 0" range="-inf inf"/>
+            <geom type="cylinder" size="0.055 0.018" axis="1 0 0" material="wheel_mat"/>
+          </body</body><!-- 右前轮足 -->
+     <body name="rf_leg_root" pos="0.18 0.17 -0.1<joint name="rf_leg_roll" type="hinge" axis="0 1 0" range="-50 50"/>
+       <geom type="cylinder" size="0.032 0.09" fromto="0 0 0 0 0 -0.09" material="body_mat<body name="rf_leg_calf" pos="0 0 -0.09"><joint name="rf_leg_pitch" type="hinge" axis="1 0 0" range="-95 95"/>
+          <geom type="cylinder" size="0.03 0.11" fromto="0 0 0 0 0 -0.11" material="body_mat"/>
+<body name="rf_wheel_body" pos="0 0 -0.11">
+            <joint name="rf_wheel_joint" type="hinge" axis="1 0 0" range="-inf inf"/>
+            <geom type="cylinder" size="0.055 0.018" axis="1 0 0" material="wheel_mat"/>
+          </body</body><!-- 左后轮足 -->
+      <body name="lb_leg_root" pos="-0.18 -0.17 -0.1"><joint name="lb_leg_roll" type="hinge" axis="0 1 0" range="-50 50"/>
+        <geom type="cylinder" size="0.032 0.09" fromto="0 0 0 0 0 -0.09" material="body_mat"/><body name="lb_leg_calf" pos="0 0 -0.09">
+<joint name="lb_leg_pitch" type="hinge" axis="1 0 0" range="-95 9<geom type="cylinder" size="0.03 0.11" fromto="0 0 0 0 0 -0.11" material="body_mat"/>
+         <body name="lb_wheel_body" pos="0 0 -0.1<joint name="lb_wheel_joint" type="hinge" axis="1 0 0" range="-inf<geom type="cylinder" size="0.055 0.018" axis="1 0 0" material="wheel</body</body></body>
+<!-- 右后轮<body name="rb_leg_root" pos="0.18 -0.17 -0.1">
+<joint name="rb_leg_roll" type="hinge" axis="0 1 0" range="-50 5<geom type="cylinder" size="0.032 0.09" fromto="0 0 0 0 0 -0.09" material="body_mat"/>
+<body name="rb_leg_calf" pos="0 0 -0.09">
+         <joint name="rb_leg_pitch" type="hinge" axis="1 0 0" range="-95 95<geom type="cylinder" size="0.03 0.11" fromto="0 0 0 0 0 -0.11" material="body_mat"/>
+          <body name="rb_wheel_body" pos="0 0 -0.11<joint name="rb_wheel_joint" type="hinge" axis="1 0 0" range="-inf inf<geom type="cylinder" size="0.055 0.018" axis="1 0 0" material="wheel_mat</body></body>
+</body>
+      
+<!-- 左臂 -->
+<body name="left_arm_shoulder" pos="-0.24 0 0.0<joint name="left_arm_yaw" type="hinge" axis="0 1 0" range="-100 100<geom type="cylinder" size="0.028 0.12" fromto="0 0 0 -0.12 0 0" material="limb_mat"/>
+<body name="left_arm_elbow" pos="-0.12 0 0">
+         <joint name="left_arm_pitch" type="hinge" axis="0 0 1" range="-120 120"/>
+          <geom type="cylinder" size="0.025 0.11" fromto="0 0 0 -0.11 0 0" material="limb_mat<body name="left_arm_wrist" pos="-0.11 0 0"><joint name="left_arm_roll" type="hinge" axis="1 0 0" range="-90 90"/>
+            <geom type="cylinder" size="0.022 0.1" fromto="0 0 0 -0.1 0 0" material="limb_mat"/>
+<site name="left_gripper" pos="-0.1 0 0" size="0.025" rgba="1 0.2 0.2 1"/></body>
+</body>
+     </body>
+      
+     <!-- 右臂 -->
+     <body name="right_arm_shoulder" pos="0.24 0 0.03<joint name="right_arm_yaw" type="hinge" axis="0 1 0" range="-100 100"/><geom type="cylinder" size="0.028 0.12" fromto="0 0 0 0.12 0 0" material="limb_mat"/>
+       <body name="right_arm_elbow" pos="0.12 0 0">
+          <joint name="right_arm_pitch" type="hinge" axis="0 0 1" range="-120 12<geom type="cylinder" size="0.025 0.11" fromto="0 0 0 0.11 0 0" material="limb_mat"/><body name="right_arm_wrist" pos="0.11 0 0">
+<joint name="right_arm_roll" type="hinge" axis="1 0 0" range="-90 9<geom type="cylinder" size="0.022 0.1" fromto="0 0 0 0.1 0 0" material="limb_mat"/>
+           <site name="right_gripper" pos="0.1 0 0" size="0.025" rgba="1 0.2 0.2 1"/>
+</body>
+        </body>
+      </body<!-- 障碍物（用于越障测试）<body name="obstacle" pos="2 0 0.08">
+     <geom name="obs_geom" type="box" size="0.3 0.5 0.08" rgba="0.8 0.2 0.2 0.6"/>
+    </world<!-- 执行器配置 -->
+ <actuator>
+   <!-- 腿部关节执行器<motor name="lf_leg_roll_motor" joint="lf_leg_roll" gear="25" ctrlrange="-200 200"/>
+    <motor name="lf_leg_pitch_motor" joint="lf_leg_pitch" gear="25" ctrlrange="-200 200"/>
+<motor name="rf_leg_roll_motor" joint="rf_leg_roll" gear="25" ctrlrange="-200 200<motor name="rf_leg_pitch_motor" joint="rf_leg_pitch" gear="25" ctrlrange="-200 200"/>
+    <motor name="lb_leg_roll_motor" joint="lb_leg_roll" gear="25" ctrlrange="-200 200"/>
+<motor name="lb_leg_pitch_motor" joint="lb_leg_pitch" gear="25" ctrlrange="-200 200<motor name="rb_leg_roll_motor" joint="rb_leg_roll" gear="25" ctrlrange="-200 200"/>
+    <motor name="rb_leg_pitch_motor" joint="rb_leg_pitch" gear="25" ctrlrange="-200 200"/>
+    
+<!-- 轮子驱动执行<motor name="lf_wheel_motor" joint="lf_wheel_joint" gear="15" ctrlrange="-300 30<motor name="rf_wheel_motor" joint="rf_wheel_joint" gear="15" ctrlrange="-300 30<motor name="lb_wheel_motor" joint="lb_wheel_joint" gear="15" ctrlrange="-300 30<motor name="rb_wheel_motor" joint="rb_wheel_joint" gear="15" ctrlrange="-300 30<!-- 左臂执行器 -->
+   <motor name="left_arm_yaw_motor" joint="left_arm_yaw" gear="12" ctrlrange="-120 120"/><motor name="left_arm_pitch_motor" joint="left_arm_pitch" gear="12" ctrlrange="-120 12<motor name="left_arm_roll_motor" joint="left_arm_roll" gear="10" ctrlrange="-100 100"/>
+    
+   <!-- 右臂执行器 --><motor name="right_arm_yaw_motor" joint="right_arm_yaw" gear="12" ctrlrange="-120 12<motor name="right_arm_pitch_motor" joint="right_arm_pitch" gear="12" ctrlrange="-120 120"/>
+   <motor name="right_arm_roll_motor" joint="right_arm_roll" gear="10" ctrlrange="-100 100"/></actuator></mujoco>
